@@ -1,1 +1,101 @@
+Вот пример кода на Java, который реализует описанную задачу:
 
+// Абстрактный класс, описывающий мебель
+abstract class Furniture {
+    private String name;
+    private double price;
+
+    public Furniture(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public abstract void use();
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+
+// Классы, наследующие от абстрактного класса Furniture
+class Chair extends Furniture {
+    public Chair(String name, double price) {
+        super(name, price);
+    }
+
+    @Override
+    public void use() {
+        System.out.println("Вы сидите на " + getName());
+    }
+}
+
+class Table extends Furniture {
+    public Table(String name, double price) {
+        super(name, price);
+    }
+
+    @Override
+    public void use() {
+        System.out.println("Вы ставите предметы на " + getName());
+    }
+}
+
+// Класс FurnitureShop, моделирующий магазин мебели
+class FurnitureShop {
+    private Furniture[] furnitures;
+    private int count;
+
+    public FurnitureShop(int capacity) {
+        furnitures = new Furniture[capacity];
+        count = 0;
+    }
+
+    public void addFurniture(Furniture furniture) {
+        if (count < furnitures.length) {
+            furnitures[count] = furniture;
+            count++;
+        } else {
+            System.out.println("Магазин заполнен, невозможно добавить новую мебель");
+        }
+    }
+
+    public void showFurnitures() {
+        for (int i = 0; i < count; i++) {
+            System.out.println(furnitures[i].getName() + " - " + furnitures[i].getPrice());
+        }
+    }
+
+    public void testFurnitures() {
+        for (int i = 0; i < count; i++) {
+            furnitures[i].use();
+        }
+    }
+}
+
+// Тестирование работы классов
+public class Main {
+    public static void main(String[] args) {
+        FurnitureShop shop = new FurnitureShop(5);
+
+        Chair chair = new Chair("Стул", 100);
+        Table table = new Table("Стол", 200);
+
+        shop.addFurniture(chair);
+        shop.addFurniture(table);
+
+        shop.showFurnitures();
+
+        shop.testFurnitures();
+    }
+}
+
+
+Этот код создает абстрактный класс Furniture, который описывает мебель с помощью имени и цены, и содержит абстрактный метод use(). Затем создаются два класса, Chair и Table, которые наследуют от Furniture и реализуют метод use(), специфичный для каждого типа мебели.
+
+Затем создается класс FurnitureShop, который имеет массив мебели и методы для добавления мебели, отображения доступной мебели и тестирования ее использования.
+
+В методе main() создается объект FurnitureShop, добавляются несколько видов мебели в магазин, затем отображается список доступной мебели и протестированы все виды мебели.
