@@ -1,4 +1,4 @@
-package pw8.task2;
+package pw9.task2;
 
 public class Car {
     private String mark;

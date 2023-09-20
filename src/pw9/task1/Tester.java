@@ -1,4 +1,4 @@
-package pw8.task1;
+package pw9.task1;
 
 public class Tester {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package pw8.task1;
+package pw9.task1;
 
 public class Dog implements Nameable {
     private String name;
