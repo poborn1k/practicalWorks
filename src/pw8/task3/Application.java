@@ -28,7 +28,7 @@ public class Application extends JFrame {
                 frames[1] = new ImageIcon("src/pw8/task3/frame1.png");
                 frames[2] = new ImageIcon("src/pw8/task3/frame2.png");
 
-                Timer timer = new Timer(1000, e -> {
+                Timer timer = new Timer(100, e -> {
                     currentFrameIndex = (currentFrameIndex + 1) % frames.length;
                     repaint();
                 });
