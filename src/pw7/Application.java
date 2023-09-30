@@ -16,6 +16,8 @@ public class Application extends JFrame {
 
     public Application() {
         // УСТАНОВКА НАДПИСЕЙ В НАЧАЛЬНОЕ СОСТОЯНИЕ (НАЧАЛО МАТЧА)
+        setSize(900, 600);
+
         milanScore = 0;
         madridScore = 0;
 
@@ -52,7 +54,7 @@ public class Application extends JFrame {
         panel.add(lastScore);
         add(panel);
 
-        pack();
+        //pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 

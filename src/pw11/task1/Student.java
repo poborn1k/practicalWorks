@@ -1,9 +1,9 @@
 package pw11.task1;
 
 class Student {
-    private String firstName;
-    private String lastName;
-    private int iDNumber;
+    private final String firstName;
+    private final String lastName;
+    private final int iDNumber;
 
     public Student(String firstName, String lastName, int iDNumber) {
         this.firstName = firstName;
@@ -17,6 +17,6 @@ class Student {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " (" + iDNumber + ")";
+        return String.format("%s %s (%d)", this.firstName, this.lastName, this.iDNumber);
     }
 }

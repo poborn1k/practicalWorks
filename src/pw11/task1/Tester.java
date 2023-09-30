@@ -1,39 +1,45 @@
 package pw11.task1;
 
+import java.util.Random;
+
 public class Tester {
     public static void main(String[] args) {
-        // Создание массива студентов
-        Student[] students = {
-                new Student("John", "Doe", 123),
-                new Student("Alice", "Smith", 456),
-                new Student("Bob", "Johnson", 789),
-                new Student("Emily", "Brown", 234),
-                new Student("Michael", "Jones", 567)
-        };
+        Random random = new Random();
 
-        // Вывод неотсортированного массива студентов
-        System.out.println("Неотсортированный массив студентов:");
-        for (Student student : students) {
-            System.out.println(student);
+        String[] firstNames = {"Zoe", "Florence", "Heidi", "Ellie", "Oscar", "William", "Ethan", "Henry"};
+        String[] secondNames = {"Evans", "Adamson", "Parson", "Gilbert", "Walker", "Davis", "Lewis", "Moore",};
+        final int size = 50;
+        Student[] students = new Student[size];
+        Student[] sortedStudents;
+
+        for (int i = 0; i < size; i++) {
+            students[i] = new Student(firstNames[random.nextInt(0, firstNames.length)],
+                    secondNames[random.nextInt(0, secondNames.length)],
+                    random.nextInt(1, 1000));
         }
 
-        // Сортировка массива студентов по iDNumber вставкой
+        for (Student tmp : students) {
+            System.out.println(tmp);
+        }
+
+        sortedStudents = sortingByInserts(students);
+
+        System.out.println("\n\n\n");
+        for (Student tmp2 : sortedStudents) {
+            System.out.println(tmp2);
+        }
+    }
+
+    private static Student[] sortingByInserts(Student[] students) {
         for (int i = 1; i < students.length; i++) {
-            Student key = students[i];
-            int j = i - 1;
-
-            while (j >= 0 && students[j].getIDNumber() > key.getIDNumber()) {
-                students[j + 1] = students[j];
-                j = j - 1;
+            Student current = students[i];
+            int j = i;
+            while (j > 0 && students[j - 1].getIDNumber() > current.getIDNumber()) {
+                students[j] = students[j - 1];
+                j--;
             }
-
-            students[j + 1] = key;
+            students[j] = current;
         }
-
-        // Вывод отсортированного массива студентов
-        System.out.println("Отсортированный массив студентов:");
-        for (Student student : students) {
-            System.out.println(student);
-        }
+        return students;
     }
 }
