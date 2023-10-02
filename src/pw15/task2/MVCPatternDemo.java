@@ -6,7 +6,7 @@ public class MVCPatternDemo {
         EmployeeView view = new EmployeeView();
         EmployeeController controller = new EmployeeController(model, view);
         controller.updateView();
-        controller.setEmployeeName("Adolf");
+        controller.setEmployeeName("Don");
         controller.setEmployeeSalary(999999);
         System.out.println("After updating, Employee Information are as follows");
         controller.updateView();

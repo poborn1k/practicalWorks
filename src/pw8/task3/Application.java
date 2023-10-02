@@ -6,7 +6,7 @@ import java.awt.*;
 public class Application extends JFrame {
 
     public Application() {
-        setSize(800, 600);
+        setSize(1200, 800);
 
         JPanel panel = new JPanel() {
             ImageIcon[] frames;
@@ -28,7 +28,7 @@ public class Application extends JFrame {
                 frames[1] = new ImageIcon("src/pw8/task3/frame1.png");
                 frames[2] = new ImageIcon("src/pw8/task3/frame2.png");
 
-                Timer timer = new Timer(100, e -> {
+                Timer timer = new Timer(200, e -> {
                     currentFrameIndex = (currentFrameIndex + 1) % frames.length;
                     repaint();
                 });

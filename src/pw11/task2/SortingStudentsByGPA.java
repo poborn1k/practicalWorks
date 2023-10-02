@@ -8,35 +8,44 @@ public class SortingStudentsByGPA implements Comparator<Student> {
         return Integer.compare(o1.getGPA(), o2.getGPA());
     }
 
-    public void quickSorter(List<Student> students, int leftBorder, int rightBorder) {
+    public void quickSorter(ArrayList<Student> students, int leftBorder, int rightBorder) {
+        if (students.size() == 0 || leftBorder >= rightBorder) {
+            return;
+        }
+
         int leftMarker = leftBorder;
         int rightMarker = rightBorder;
-        int midMarker = (leftMarker + rightMarker) / 2;
-        do {
-            while (compare(students.get(leftMarker), students.get(midMarker)) == -1) {
+        Student pivot = students.get((leftBorder + rightBorder) / 2);
+
+        while (leftMarker <= rightMarker) {
+            while (compare(students.get(leftMarker), pivot) == -1) {
                 leftMarker++;
             }
-            while (compare(students.get(rightMarker), students.get(midMarker)) == 1) {
+            while (compare(students.get(rightMarker), pivot) == 1) {
                 rightMarker--;
             }
 
             if (leftMarker <= rightMarker) {
-                if (leftMarker < rightMarker) {
-                    Student tmp = students.get(leftMarker);
-                    students.set(leftMarker, students.get(rightMarker));
-                    students.set(rightMarker, tmp);
-                }
+                Student tmp = students.get(leftMarker);
+                students.set(leftMarker, students.get(rightMarker));
+                students.set(rightMarker, tmp);
+
                 leftMarker++;
                 rightMarker--;
             }
 
-        } while (leftMarker <= rightMarker);
+            for (Student tmp : students) {
+                System.out.print(tmp.getGPA() + " ");
+            }
+            System.out.println();
 
-        if (leftMarker < rightBorder) {
-            quickSorter(students, leftMarker, rightBorder);
         }
+
         if (leftBorder < rightMarker) {
             quickSorter(students, leftBorder, rightMarker);
+        }
+        if (rightBorder > leftMarker) {
+            quickSorter(students, leftMarker, rightBorder);
         }
     }
 }

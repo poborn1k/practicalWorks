@@ -47,11 +47,12 @@ public class Application extends JFrame {
         // РАССТАНОВКА КНОПОК И НАДПИСЕЙ В ПРИЛОЖЕНИИ ПО СЕТКЕ 3 СТРОКИ 2 СТОЛБЦА
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 2));
-        panel.add(milanButton);
-        panel.add(madridButton);
+
         panel.add(result);
-        panel.add(winner);
+        panel.add(milanButton);
         panel.add(lastScore);
+        panel.add(madridButton);
+        panel.add(winner);
         add(panel);
 
         //pack();
