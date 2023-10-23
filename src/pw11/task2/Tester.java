@@ -8,7 +8,6 @@ public class Tester {
 
         String[] firstNames = {"Zoe", "Florence", "Heidi", "Ellie", "Oscar", "William", "Ethan", "Henry"};
         String[] secondNames = {"Evans", "Adamson", "Parson", "Gilbert", "Walker", "Davis", "Lewis", "Moore",};
-        //List<Student> students = new ArrayList<>();
         ArrayList<Student> students = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
@@ -30,9 +29,5 @@ public class Tester {
         for (Student tmp : students) {
             System.out.println(tmp);
         }
-        /*Student p1 = new Student("af", "fas", 10);
-        Student p2 = new Student("af", "fas", 1);
-        SortingStudentsByGPA test = new SortingStudentsByGPA();
-        System.out.println(test.compare(p1, p2));*/
     }
 }

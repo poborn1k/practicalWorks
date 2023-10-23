@@ -23,7 +23,6 @@ public class Tester {
         // Shape s2 = new Shape(); - Shape - абстрактный класс, нельзя создать экземпляр абстрактного класса
 
         Shape s3 = new Rectangle(1.0, 2.0, "RED", false); // upcast
-        System.out.println("NDSFJNKJDSJFGV");
         System.out.println(s3);
         System.out.println(s3.getArea());
         System.out.println(s3.getPerimeter());
@@ -36,6 +35,7 @@ public class Tester {
         System.out.println(r1.getArea());
         System.out.println(r1.getColor());
         System.out.println(r1.getLength());
+
         Shape s4 = new Square(6.6); // Upcast
         System.out.println(s4);
         System.out.println(s4.getArea());
@@ -60,5 +60,6 @@ public class Tester {
         System.out.println(sq1.getColor());
         System.out.println(sq1.getSide());
         System.out.println(sq1.getLength());
+
     }
 }

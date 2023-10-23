@@ -1,6 +1,7 @@
-package pw11.task2;
+package pw17.task2;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class SortingStudentsByGPA implements Comparator<Student> {
     @Override
