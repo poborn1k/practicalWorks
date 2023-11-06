@@ -8,7 +8,7 @@ public class Tester {
 
         String[] firstNames = {"Zoe", "Florence", "Heidi", "Ellie", "Oscar", "William", "Ethan", "Henry"};
         String[] secondNames = {"Evans", "Adamson", "Parson", "Gilbert", "Walker", "Davis", "Lewis", "Moore",};
-        final int size = 50;
+        final int size = 25;
         Student[] students = new Student[size];
         Student[] sortedStudents;
 

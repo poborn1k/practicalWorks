@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Tester {
     public static void main(String[] args) {
-        Student[] array1 = { new Student("fsad", 19), new Student("fsad", 3),
-                new Student("fsad", 1), new Student("fsad", 100), new Student("fsad", 72) };
-        Student[] array2 = { new Student("fsad", 432), new Student("fsad", 23),
-                new Student("fsad", 43), new Student("fsad", 1), new Student("fsad", 74) };
+        Student[] array1 = { new Student("Student1", 19), new Student("Student2", 3),
+                new Student("Student3", 1), new Student("Student4", 100), new Student("Student15", 72) };
+        Student[] array2 = { new Student("Student6", 432), new Student("Student7", 23),
+                new Student("Student8", 43), new Student("Student9", 1), new Student("Student10", 74) };
         Student[] bothArrays = new Student[array1.length + array2.length];
 
 
