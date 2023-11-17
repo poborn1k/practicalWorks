@@ -15,7 +15,7 @@ public class Application extends JFrame implements ActionListener {
         StringBuilder expression = new StringBuilder();
 
         JFrame frame = new JFrame("RPN Calculator");
-        Font BigFontTR = new Font("TimesRoman", Font.BOLD, 20);
+        Font BigFontTR = new Font("TimesRoman", Font.PLAIN, 20);
 
 
         JTextField result = new JTextField(15);
@@ -37,6 +37,8 @@ public class Application extends JFrame implements ActionListener {
             });
             numbers.add(btn);
         }
+
+
 
         JPanel numberButtons = new JPanel();
         numbers.forEach(numberButtons::add);
