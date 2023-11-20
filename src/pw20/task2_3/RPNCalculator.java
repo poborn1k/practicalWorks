@@ -1,9 +1,14 @@
-package pw20.task2;
+package pw20.task2_3;
 
 import java.util.Stack;
 
 public class RPNCalculator {
+
     public String expressionToRPN(String expression) {
+        if (!stringIsCorrect(expression)) {
+            return "";
+        }
+
         String current = "";
         Stack<Character> stack = new Stack<>();
 
@@ -44,7 +49,11 @@ public class RPNCalculator {
         return current;
     }
 
-    public double RPNToAnswer(String rpn) {
+    public String RPNToAnswer(String rpn) {
+        if (rpn.isEmpty()) {
+            return "Invalid input";
+        }
+
         String operand = "";
         Stack<Double> stack = new Stack<>();
 
@@ -79,16 +88,64 @@ public class RPNCalculator {
             }
         }
 
-        return stack.pop();
+        return String.valueOf(stack.pop());
     }
 
-    private int getPriority(char token) {
-        return switch (token) {
+    private int getPriority(char sym) {
+        return switch (sym) {
             case '*', '/' -> 3;
             case '+', '-' -> 2;
             case '(' -> 1;
             case ')' -> -1;
             default -> 0;
         };
+    }
+
+    private boolean stringIsCorrect(String input) {
+        if (input.length() < 3) {
+            return false;
+        } else {
+            Stack<Character> brackets = new Stack<>();
+            int operations = 0;
+            int values = 0;
+
+            for (int i = 0; i < input.length(); i++) {
+                int priority = getPriority(input.charAt(i));
+
+                switch (priority) {
+                    case 2, 3 -> {
+                        if (i == 0 || (input.charAt(i) == input.charAt(i - 1))) {
+                            return false;
+                        }
+                        operations++;
+                    }
+                    case 0 -> {
+                        if (input.charAt(i) == '0' && input.charAt(i - 1) == '/') {
+                            return false;
+                        }
+                        values++;
+
+                        int j = i + 1;
+                        while (j < input.length() && getPriority(input.charAt(j)) == 0) {
+                            j++;
+                        }
+                        i = j - 1;
+                    }
+                    case 1 -> brackets.push('(');
+                    case -1 -> {
+                        if (brackets.isEmpty()) {
+                            return false;
+                        }
+                        brackets.pop();
+                    }
+                }
+            }
+
+            if (!brackets.isEmpty()) {
+                return false;
+            }
+
+            return values > operations;
+        }
     }
 }
