@@ -2,31 +2,36 @@ package pw21.task2;
 
 import java.util.NoSuchElementException;
 
-abstract class AbstractQueue<E> implements Queue<E> {
-    // Предусловие: очередь не пуста
-    // Постусловие: первый элемент удален из очереди
-    public E dequeue() {
-        if (isEmpty()) {
-            throw new NoSuchElementException("Queue is empty");
-        }
-        return poll();
+public abstract class AbstractQueue<E> implements Queue<E> {
+    protected int size;  // Текущий размер очереди
+
+    // Конструктор
+    public AbstractQueue() {
+        this.size = 0;
     }
 
-    // Предусловие: очередь не пуста
-    public E element() {
-        if (isEmpty()) {
-            throw new NoSuchElementException("Queue is empty");
-        }
-        return peek();
+    // Реализация методов интерфейса Queue
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
     }
 
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
     public void clear() {
-        while (!isEmpty()) {
-            dequeue();
-        }
+        doClear();
     }
 
-    protected abstract E poll();
+    // Абстрактные методы, которые должны быть реализованы в подклассах
+    protected abstract void doEnqueue(E element);
 
-    protected abstract E peek();
+    protected abstract E doDequeue();
+
+    protected abstract E doElement();
+
+    protected abstract void doClear();
 }

@@ -2,66 +2,68 @@ package pw21.task1;
 
 import java.util.Arrays;
 
-public class ArrayQueueModule {
+public class ArrayQueueModule implements Queue {
     private static Object[] elements = new Object[10];
     private static int size = 0;
-    private static int head = 0;
+    private static int front = 0;
+    private static int rear = 0;
 
-    // Постусловие: элемент добавлен в конец очереди
-    public static void enqueue(Object element) {
-        ensureCapacity(size + 1);
-        elements[(head + size) % elements.length] = element;
+    // Проверка инварианта
+    // Инвариант: size >= 0 && size <= elements.length
+    // Инвариант: front >= 0 && front < elements.length
+    // Инвариант: rear >= 0 && rear < elements.length
+    // Инвариант: size == 0 => front == rear
+
+    // Постусловие: size = size' + 1, front = front', rear = (rear' + 1) % elements.length
+    public void enqueue(Object element) {
+        ensureCapacity();
+        elements[rear] = element;
+        rear = (rear + 1) % elements.length;
         size++;
     }
 
-    // Предусловие: очередь не пуста
-    public static Object element() {
-        if (size == 0) {
+    // Постусловие: size > 0
+    public Object element() {
+        if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
-        return elements[head];
+        return elements[front];
     }
 
-    // Предусловие: очередь не пуста
-    // Постусловие: первый элемент удален из очереди
-    public static Object dequeue() {
-        if (size == 0) {
+    // Постусловие: size = size' - 1, front = (front' + 1) % elements.length
+    public Object dequeue() {
+        if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
-        Object element = elements[head];
-        elements[head] = null;
-        head = (head + 1) % elements.length;
+        Object removedElement = elements[front];
+        elements[front] = null;
+        front = (front + 1) % elements.length;
         size--;
-        return element;
+        return removedElement;
     }
 
-    public static int size() {
+    // Постусловие: результат - текущий размер очереди
+    public int size() {
         return size;
     }
 
-    public static boolean isEmpty() {
+    // Постусловие: результат - true, если очередь пуста, иначе - false
+    public boolean isEmpty() {
         return size == 0;
     }
 
-    public static void clear() {
+    // Постусловие: size = 0, front = 0, rear = 0
+    public void clear() {
         Arrays.fill(elements, null);
         size = 0;
-        head = 0;
+        front = 0;
+        rear = 0;
     }
 
-    private static void ensureCapacity(int capacity) {
-        if (capacity > elements.length) {
-            int newSize = elements.length * 2;
-            elements = Arrays.copyOf(elements, newSize);
-            if (head > 0) {
-                System.arraycopy(elements, 0, elements, elements.length / 2, head);
-                if (head + size > elements.length / 2) {
-                    System.arraycopy(elements, head, elements, elements.length / 2 + head, size - head);
-                } else {
-                    System.arraycopy(elements, head, elements, elements.length / 2 + head, size);
-                }
-                head += elements.length / 2;
-            }
+    // Приватный метод для увеличения емкости массива при необходимости
+    private void ensureCapacity() {
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, 2 * size);
         }
     }
 }

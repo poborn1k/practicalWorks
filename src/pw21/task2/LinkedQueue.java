@@ -1,55 +1,89 @@
 package pw21.task2;
 
-import java.util.NoSuchElementException;
+public class LinkedQueue<E> implements Queue<E> {
+    private Node<E> front;  // Указатель на начало очереди
+    private Node<E> rear;   // Указатель на конец очереди
+    private int size;       // Текущий размер очереди
 
-class LinkedQueue<E> extends AbstractQueue<E> {
-    private static class Node<E> {
-        E item;
-        Node<E> next;
-
-        Node(E item, Node<E> next) {
-            this.item = item;
-            this.next = next;
-        }
+    // Конструктор
+    public LinkedQueue() {
+        this.front = null;
+        this.rear = null;
+        this.size = 0;
     }
 
-    private Node<E> head;
-    private Node<E> tail;
-    private int size;
-
-    // Постусловие: элемент добавлен в конец очереди
+    // Реализация методов интерфейса Queue
+    @Override
     public void enqueue(E element) {
-        if (tail == null) {
-            head = tail = new Node<>(element, null);
+        Node<E> newNode = new Node<>(element, null);
+        if (isEmpty()) {
+            front = newNode;
         } else {
-            tail.next = new Node<>(element, null);
-            tail = tail.next;
+            rear.setNext(newNode);
         }
+        rear = newNode;
         size++;
     }
 
-    public int size() {
-        return size;
+    @Override
+    public E dequeue() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        E removedElement = front.getElement();
+        front = front.getNext();
+        size--;
+        if (isEmpty()) {
+            rear = null;
+        }
+        return removedElement;
     }
 
+    @Override
+    public E element() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Queue is empty");
+        }
+        return front.getElement();
+    }
+
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
-    protected E poll() {
-        E result = head.item;
-        head = head.next;
-        if (head == null) {
-            tail = null;
-        }
-        size--;
-        return result;
+    @Override
+    public int size() {
+        return size;
     }
 
-    protected E peek() {
-        if (head == null) {
-            throw new NoSuchElementException("Queue is empty");
+    @Override
+    public void clear() {
+        front = null;
+        rear = null;
+        size = 0;
+    }
+
+    // Вспомогательный класс Node
+    private static class Node<E> {
+        private E element;
+        private Node<E> next;
+
+        public Node(E element, Node<E> next) {
+            this.element = element;
+            this.next = next;
         }
-        return head.item;
+
+        public E getElement() {
+            return element;
+        }
+
+        public Node<E> getNext() {
+            return next;
+        }
+
+        public void setNext(Node<E> next) {
+            this.next = next;
+        }
     }
 }

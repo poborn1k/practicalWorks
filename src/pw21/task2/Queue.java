@@ -1,10 +1,21 @@
 package pw21.task2;
 
-interface Queue<E> {
+public interface Queue<E> {
+    // Добавить элемент в конец очереди
     void enqueue(E element);
+
+    // Извлечь и удалить элемент из начала очереди
     E dequeue();
+
+    // Получить элемент из начала очереди без удаления
     E element();
-    int size();
+
+    // Проверить, является ли очередь пустой
     boolean isEmpty();
+
+    // Получить текущий размер очереди
+    int size();
+
+    // Очистить очередь (удалить все элементы)
     void clear();
 }

@@ -2,66 +2,66 @@ package pw21.task1;
 
 import java.util.Arrays;
 
-public class ArrayQueueADT {
-    private Object[] elements = new Object[10];
-    private int size = 0;
-    private int head = 0;
+abstract class ArrayQueueADT implements Queue {
+    protected Object[] elements = new Object[10];
+    protected int size = 0;
+    protected int front = 0;
+    protected int rear = 0;
 
-    // Постусловие: элемент добавлен в конец очереди
-    public static void enqueue(ArrayQueueADT queue, Object element) {
-        ensureCapacity(queue, queue.size + 1);
-        queue.elements[(queue.head + queue.size) % queue.elements.length] = element;
-        queue.size++;
+    // Абстрактные методы, которые должны быть реализованы в подклассах
+    public abstract void enqueue(Object element);
+    public abstract Object element();
+    public abstract Object dequeue();
+
+    // Реализация остальных методов как общих для всех подклассов
+    public int size() {
+        return size;
     }
 
-    // Предусловие: очередь не пуста
-    public static Object element(ArrayQueueADT queue) {
-        if (queue.size == 0) {
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void clear() {
+        Arrays.fill(elements, null);
+        size = 0;
+        front = 0;
+        rear = 0;
+    }
+
+    // Приватный метод для увеличения емкости массива при необходимости
+    protected void ensureCapacity() {
+        if (size == elements.length) {
+            elements = Arrays.copyOf(elements, 2 * size);
+        }
+    }
+}
+
+// Реализация очереди в виде класса
+class ArrayQueue extends ArrayQueueADT {
+    // Переопределение абстрактных методов
+    public void enqueue(Object element) {
+        ensureCapacity();
+        elements[rear] = element;
+        rear = (rear + 1) % elements.length;
+        size++;
+    }
+
+    public Object element() {
+        if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
-        return queue.elements[queue.head];
+        return elements[front];
     }
 
-    // Предусловие: очередь не пуста
-    // Постусловие: первый элемент удален из очереди
-    public static Object dequeue(ArrayQueueADT queue) {
-        if (queue.size == 0) {
+    public Object dequeue() {
+        if (isEmpty()) {
             throw new IllegalStateException("Queue is empty");
         }
-        Object element = queue.elements[queue.head];
-        queue.elements[queue.head] = null;
-        queue.head = (queue.head + 1) % queue.elements.length;
-        queue.size--;
-        return element;
-    }
-
-    public static int size(ArrayQueueADT queue) {
-        return queue.size;
-    }
-
-    public static boolean isEmpty(ArrayQueueADT queue) {
-        return queue.size == 0;
-    }
-
-    public static void clear(ArrayQueueADT queue) {
-        Arrays.fill(queue.elements, null);
-        queue.size = 0;
-        queue.head = 0;
-    }
-
-    private static void ensureCapacity(ArrayQueueADT queue, int capacity) {
-        if (capacity > queue.elements.length) {
-            int newSize = queue.elements.length * 2;
-            queue.elements = Arrays.copyOf(queue.elements, newSize);
-            if (queue.head > 0) {
-                System.arraycopy(queue.elements, 0, queue.elements, queue.elements.length / 2, queue.head);
-                if (queue.head + queue.size > queue.elements.length / 2) {
-                    System.arraycopy(queue.elements, queue.head, queue.elements, queue.elements.length / 2 + queue.head, queue.size - queue.head);
-                } else {
-                    System.arraycopy(queue.elements, queue.head, queue.elements, queue.elements.length / 2 + queue.head, queue.size);
-                }
-                queue.head += queue.elements.length / 2;
-            }
-        }
+        Object removedElement = elements[front];
+        elements[front] = null;
+        front = (front + 1) % elements.length;
+        size--;
+        return removedElement;
     }
 }

@@ -21,6 +21,10 @@
       <excludeFolder url="file://$MODULE_DIR$/src/pw16" />
       <excludeFolder url="file://$MODULE_DIR$/src/pw17" />
       <excludeFolder url="file://$MODULE_DIR$/src/pw20" />
+      <excludeFolder url="file://$MODULE_DIR$/src/pw11" />
+      <excludeFolder url="file://$MODULE_DIR$/src/pw18" />
+      <excludeFolder url="file://$MODULE_DIR$/src/pw19" />
+      <excludeFolder url="file://$MODULE_DIR$/src/pw22" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
