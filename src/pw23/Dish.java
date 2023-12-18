@@ -1,24 +1,9 @@
 package pw23;
 
-public class Dish implements Item {
-    private double cost;
-    private String name;
-    private String description;
-
-    @Override
-    public double getCost() {
-        return cost;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String getDescription() {
-        return description;
-    }
+public final class Dish implements Item {
+    private double cost = -1;
+    private String name = "";
+    private String description = "";
 
     public void setCost(double cost) {
         this.cost = cost;
@@ -30,5 +15,20 @@ public class Dish implements Item {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public double getCost() {
+        return 0;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public String getDescription() {
+        return null;
     }
 }

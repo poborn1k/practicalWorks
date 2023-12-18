@@ -1,6 +1,8 @@
-package pw23;
+package tmp;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class InternetOrder {
     private Node head;
@@ -17,13 +19,13 @@ public class InternetOrder {
     }
 
     public InternetOrder() {
-        head = new Node(null);
+        head = new Node(null); // Создание головного элемента
         head.next = head;
         head.prev = head;
     }
 
     public InternetOrder(Item[] items) {
-        this();
+        this(); // Вызов конструктора по умолчанию
         for (Item item : items) {
             addPosition(item);
         }
@@ -119,33 +121,20 @@ public class InternetOrder {
     }
 
     public String[] uniqueItems() {
-        String[] unique = new String[size];
+        Set<String> uniqueNames = new LinkedHashSet<>();
         Node current = head.next;
-        int counter = 0;
 
         while (current != head) {
-            boolean flag = true;
-
-            for (String names : unique) {
-                if (current.data.getName().equals(names) || current.data == null) {
-                    flag = false;
-                }
-            }
-            if (flag) {
-                unique[counter] = current.data.getName();
-                counter++;
-            }
-
+            uniqueNames.add(current.data.getName());
             current = current.next;
         }
 
-        return unique;
+        return uniqueNames.toArray(new String[0]);
     }
 
     public Item[] sortedByPrice() {
         Item[] items = getOrderedItems();
-        Arrays.sort(items, (item1, item2) -> Double.compare(item2.getCost(), item1.getCost()));
+        Arrays.sort(items, (item1, item2) -> Double.compare(item2.getCost(), item1.getCost())); // Сортировка по убыванию цены
         return items;
     }
-
 }

@@ -1,13 +1,19 @@
 package pw2;
 
-import java.util.Random;
+import java.util.*;
 
 public class Tester {
     public static void main(String[] args) {
         Tester test = new Tester();
+        System.out.println("TASK 1");
         test.task1();
+        System.out.println("\nTASK 2");
+        System.out.println(test.factorial(5));
+        System.out.println("\nTASK 3");
         test.task3();
+        System.out.println("\nTASK 4");
         test.task4();
+        System.out.println("\nTASK 5");
         test.task5();
     }
 
@@ -32,15 +38,16 @@ public class Tester {
     }
 
     private void task4() {
-        int[] array = new int[10];
+        Integer[] array = new Integer[10];
         Random random = new Random();
         for (int i = 0; i < array.length; i++) {
-            array[i] = random.nextInt();
+            array[i] = random.nextInt(0, 1000);
         }
         for (int number : array) {
             System.out.print(number + " ");
         }
-        // sorted
+        Arrays.sort(array, (item1, item2) -> Integer.compare(item2, item1));
+        System.out.println();
         for (int number : array) {
             System.out.print(number + " ");
         }
