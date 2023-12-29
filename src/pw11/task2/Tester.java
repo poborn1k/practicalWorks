@@ -20,7 +20,7 @@ public class Tester {
             System.out.println(tmp);
         }
 
-        System.out.println("\n\n\n");
+        System.out.println("\n");
 
         SortingStudentsByGPA test = new SortingStudentsByGPA();
 

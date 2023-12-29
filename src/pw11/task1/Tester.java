@@ -8,7 +8,7 @@ public class Tester {
 
         String[] firstNames = {"Zoe", "Florence", "Heidi", "Ellie", "Oscar", "William", "Ethan", "Henry"};
         String[] secondNames = {"Evans", "Adamson", "Parson", "Gilbert", "Walker", "Davis", "Lewis", "Moore",};
-        final int size = 25;
+        final int size = 10;
         Student[] students = new Student[size];
         Student[] sortedStudents;
 
@@ -24,7 +24,7 @@ public class Tester {
 
         sortedStudents = sortingByInserts(students);
 
-        System.out.println("\n\n\n");
+        System.out.println("\n");
         for (Student tmp2 : sortedStudents) {
             System.out.println(tmp2);
         }

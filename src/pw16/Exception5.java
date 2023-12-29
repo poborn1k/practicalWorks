@@ -17,6 +17,6 @@ public class Exception5 {
 
     public static void main(String[] args) {
         //step1();
-        //step2();
+        step2();
     }
 }
